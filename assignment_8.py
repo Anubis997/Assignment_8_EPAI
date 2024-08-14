@@ -4,8 +4,6 @@ import random
 import time
 from tqdm import tqdm
 
-!pip install faker
-
 from faker import Faker
 fake = Faker()
 
