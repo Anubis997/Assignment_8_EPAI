@@ -4,8 +4,87 @@ import random
 import time
 from tqdm import tqdm
 from faker import Faker
-
+import sys
 fake = Faker()
+
+Patient_db=namedtuple('Patient_db','name age location blood_type' )
+
+Patient_db.__docstring__="this is a person class"
+Patient_db.name.__doc__="name of the person"
+Patient_db.location.__doc__="location of the person"
+Patient_db.age.__doc__="age of the person"
+Patient_db.blood_type.__doc__="blood type of the person"
+
+# Function to generate age
+def generate_age(min_age=0, max_age=100):
+    return random.randint(min_age, max_age)
+
+# Function to generate a random blood type
+def generate_blood_type():
+    blood_types = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
+    return random.choice(blood_types)
+
+#Function to generate latitudes and longitudes
+def generate_longitudes_latitudes():
+    return (random.uniform(-90, 90),random.uniform(-90, 90))
+
+#Populating named_tuple db
+patient_db_named_tuple=[Patient_db(fake.name(),generate_age(),generate_longitudes_latitudes(),generate_blood_type())for i in range(10000)]
+
+
+#Populating dictionary db
+patient_db_dictionary= {
+   fake.name(): {
+
+        'location':generate_longitudes_latitudes(),
+        'age': generate_age(),
+        'blood_type': generate_blood_type()
+    }
+    for _ in range(10000)
+}
+def calculate_statistics(data_source):
+    start_time = time.time()
+
+    age_counter = 0
+    location_counter_lat = 0
+    location_counter_long = 0
+    bloodgroup_dict = {}
+    count = 0
+
+    if isinstance(data_source, dict):
+        # Handle dictionary of dictionaries
+        for key, value in data_source.items():
+            count += 1
+            age_counter += value['age']
+            location_counter_lat += value['location'][0]
+            location_counter_long += value['location'][1]
+            bloodgroup_dict[value['blood_type']] = bloodgroup_dict.get(value['blood_type'], 0) + 1
+
+    elif isinstance(data_source, list):
+        # Handle list of objects
+        for item in data_source:
+            count += 1
+            age_counter += item.age
+            location_counter_lat += item.location[0]
+            location_counter_long += item.location[1]
+            bloodgroup_dict[item.blood_type] = bloodgroup_dict.get(item.blood_type, 0) + 1
+
+    average_age = age_counter / count
+    mean_location = (location_counter_lat / count ,
+                     location_counter_long / count)
+    most_common_blood_type = max(bloodgroup_dict, key=bloodgroup_dict.get, default='None')
+
+    end_time = time.time()
+
+    print("Average age of all patients:", average_age)
+    print("Mean location of all patients:", mean_location)
+    print("Most common blood type:", most_common_blood_type)
+    
+    return average_age,end_time-start_time,sys.getsizeof(data_source)
+    
+average_age_dictionary_db,Time_dictionary_db,space_required_dictionary_db=calculate_statistics(patient_db_dictionary)
+
+average_age_named_tuple_db,Time_named_tuple_db,space_required_named_tuple_db=calculate_statistics(patient_db_named_tuple)
 
 def open_price(seed,circuit=0.1):
 
