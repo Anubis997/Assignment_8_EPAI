@@ -52,3 +52,20 @@ def irrelevant_Index_Hi_Lo_prices():
     assert avg_high > avg_close
     assert avg_high > avg_open
 
+def test_generate_blood_type():
+    valid_blood_types = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
+    # Test multiple calls
+    for _ in range(100):  # Sample multiple times
+        blood_type = generate_blood_type()
+        assert blood_type in valid_blood_types, f"Expected one of {valid_blood_types}"
+
+def test_generate_longitudes_latitudes():
+
+    latitude, longitude = generate_longitudes_latitudes()
+    assert -90 <= latitude <= 90, f"Expected latitude between -90 and 90"
+    assert -180 <= longitude <= 180, f"Expected longitude between -180 and 180"
+
+def test_generate_age():
+    # Test default range
+    age = generate_age()
+    assert 0 <= age <= 100, f"Expected age between 0 and 100"
