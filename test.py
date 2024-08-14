@@ -53,19 +53,31 @@ def irrelevant_Index_Hi_Lo_prices():
     assert avg_high > avg_open
 
 def test_generate_blood_type():
+    ''' Check if valid blood_types are generated '''
     valid_blood_types = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
-    # Test multiple calls
     for _ in range(100):  # Sample multiple times
         blood_type = generate_blood_type()
-        assert blood_type in valid_blood_types, f"Expected one of {valid_blood_types}"
+        assert blood_type in valid_blood_types
 
 def test_generate_longitudes_latitudes():
-
+   ''' Check if valid coordinates are generated '''
     latitude, longitude = generate_longitudes_latitudes()
-    assert -90 <= latitude <= 90, f"Expected latitude between -90 and 90"
-    assert -180 <= longitude <= 180, f"Expected longitude between -180 and 180"
+    assert -90 <= latitude <= 90
+    assert -180 <= longitude <= 180
 
 def test_generate_age():
-    # Test default range
+    ''' Check if valid age range is generated '''
     age = generate_age()
-    assert 0 <= age <= 100, f"Expected age between 0 and 100"
+    assert 0 <= age <= 100
+
+def check_mean_age():
+   ''' As we used rand.randint for age which uses a uniform distribution, we will should get a mean around 50 for large datasets''' 
+   assert 49 <= average_age_dictionary_db,average_age_named_tuple_db <= 51
+  
+def compare_execution_time():
+   ''' Checking whether named_tuple execution is faster or not''' 
+   assert Time_dictionary_db>Time_named_tuple_db
+
+def compare_memory_usage():
+   ''' Dictionary Db's require more memory than Named Tuples in general''' 
+   assert space_required_dictionary_db>space_required_named_tuple_db
