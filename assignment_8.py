@@ -3,8 +3,8 @@ from collections import namedtuple
 import random
 import time
 from tqdm import tqdm
-
 from faker import Faker
+
 fake = Faker()
 
 def open_price(seed,circuit=0.1):
