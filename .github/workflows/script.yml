@@ -21,6 +21,6 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a python script
-        run: python EPAI_course/test.py
+        run: python test.py
 
   
