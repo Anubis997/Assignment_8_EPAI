@@ -61,9 +61,9 @@ def test_generate_blood_type():
 
 def test_generate_longitudes_latitudes():
    ''' Check if valid coordinates are generated '''
-    latitude, longitude = generate_longitudes_latitudes()
-    assert -90 <= latitude <= 90
-    assert -180 <= longitude <= 180
+   latitude, longitude = generate_longitudes_latitudes()
+   assert -90 <= latitude <= 90
+   assert -180 <= longitude <= 180
 
 def test_generate_age():
     ''' Check if valid age range is generated '''
