@@ -33,6 +33,17 @@ Memory required for Patient_data with Dictionary :295000
 Time required for calculating metrics with Named_Tuples: 0.024099111557006836
 Time required for calculating metrics with Dictionary: 0.017008304595947266
 
+
+**Statistics for dictionary:**
+Average age of all patients: 50.40968085106383
+Mean location of all patients: (0.795321198328023, -0.18795068109008062)
+Most common blood type: O+
+
+**Statistics for list of Tuples:**
+Average age of all patients: 50.4074
+Mean location of all patients: (-0.3468375142858463, -0.19984633992533904)
+Most common blood type: O-
+
 **We can conclude that for both memory and execution purposes Named_Tuples are much more efficient. I tried crunching metrics using
 tuple of tuples(Generator) as well, but it was relatively slower when compared to Named_tuples enclosed by lists. However,
 memory wise generators are the most efficient data sources**
